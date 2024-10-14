@@ -59,6 +59,19 @@ jupyter notebook文件：接入Materials_Project数据库，并进行晶格表�
 (3)在循环所有可能的截断的表面，如果是Au(111)的话只有一个可能的暴露表面，如果是化合物，可能有多种表面
 (4)用make_supercell进行扩胞
 
+### 12. file.ipynb
+数据提取,并写入atom.{step}.csv文件和file_list.txt
 
+### 13.v4-End.py 
+全CPU加速,实现溶剂化壳层分类与统计
+(1)在MD后实现了阴阳离子和溶剂分子的划分,如放入posk posDMM posFSI中
+(2)两个for嵌套,实现碱金属离子与溶剂分子 和 阴离子的配位统计(溶剂化壳层内,RDF距离限制)
+(3)两个for嵌套,实现阴离子与碱金属离子的配位统计
+(4)统计ratioAGG:SSIP,CIP,AGG(FSI-*K)
+(5)统计ratioAGGFSI:*FSI-K
+(6)统计ratioCN(such as DMM=3 FSI=0 CNDMM=7 CNFSI=0) 溶剂化壳层内溶剂分子数量及溶剂分子上配位数
+
+### 14.str_outputs_3.py
+根据ratioCN:配位情况及配位数 将对应的溶剂化团簇提取出来生成gjf文件
 
 
