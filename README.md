@@ -52,3 +52,6 @@ jupyter notebook文件：接入Materials_Project数据库，并进行晶格表�
 (2)SlabGenerator产生所有可能截断的表面，先读入一个structure类的结构，确定晶面指数：miller_index=[1, 1, 1]，确定slab层的最小厚度：min_slab_size=8.0 (unit: Angstrom)，确定真空层的厚度：min_vacuum_size=15.0 (unit: Angstrom)
 (3)在循环所有可能的截断的表面，如果是Au(111)的话只有一个可能的暴露表面，如果是化合物，可能有多种表面
 (4)用make_supercell进行扩胞
+
+### 10. get_holumo.sh
+脚本文件:调用Multiwfn_noGUI 实现对fchk文件分析, 并提取HOMO和LUMO值存入holumo.txt中
