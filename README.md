@@ -55,3 +55,6 @@ jupyter notebook文件：接入Materials_Project数据库，并进行晶格表�
 
 ### 10. get_holumo.sh
 脚本文件:调用Multiwfn_noGUI 实现对fchk文件分析, 并提取HOMO和LUMO值存入holumo.txt中
+
+### 11. PDB_SMI.ipynb
+jupyter notebook文件:读取所需PDB文件(Screening.txt目录),创建result.txt 逐行读取PDB文件内容，将其转换为SMILES描述符并写入result.txt中
