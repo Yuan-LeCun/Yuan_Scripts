@@ -46,11 +46,14 @@ chkTofchk&predEle.sh 的简化版，只有第(3-5)步骤
 (3)引入报错机制；在formchk转换失败时，输出错误信息
 (4)在Multiwfn_noGUI分析失败时，在result.txt中写入错误文件
 
+### 8.1 chkTofchk&predEle3.sh
+对chkTofchk&predEle2.sh进一步修改, 加入了MPI, HOMO, LUMO
+
 ### 9. preddens.sh
 脚本文件：利用Multiwfn基于分子表面静电势描述符预测中性分子的晶体密度
 
 ### 10. get_holumo.sh
-脚本文件:调用Multiwfn_noGUI 实现对fchk文件分析, 并提取HOMO和LUMO值存入holumo.txt中
+脚本文件:调用Multiwfn_noGUI 实现对本文件夹下的所有fchk文件分析, 并提取HOMO和LUMO值存入holumo.txt中
 
 ### 11. 自动切割表面.ipynb
 jupyter notebook文件：接入Materials_Project数据库，并进行晶格表面自动切割
