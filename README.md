@@ -77,4 +77,7 @@ jupyter notebook文件：接入Materials_Project数据库，并进行晶格表�
 ### 14.str_outputs_3.py
 根据ratioCN:配位情况及配位数 将对应的溶剂化团簇提取出来生成gjf文件
 
-
+### 15. smiles&graph.ipynb
+(1)利用NetworkX 和 RDKit包读取SMILES
+(2)结构绘制为图片并保存
+(3)SMILES与图片一同插入进excel中
