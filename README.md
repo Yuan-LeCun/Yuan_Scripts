@@ -81,3 +81,8 @@ jupyter notebook文件：接入Materials_Project数据库，并进行晶格表�
 (1)利用NetworkX 和 RDKit包读取SMILES
 (2)结构绘制为图片并保存
 (3)SMILES与图片一同插入进excel中
+(4)第三列, 第四列分别是分子式和分子重量用于描述分子
+
+### 16. answer&que.ipynb
+(1)与smiles&graph.ipynb联用, 读取dataset_with_image.xlsx文件
+(2)通过提示栏输入分子式和分子重量, 将对应的Smiles文件提取进extracted_smiles.xlsx文件中, 用于后续的Smiles_trans_PDB_trans_gjf
