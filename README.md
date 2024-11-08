@@ -62,6 +62,9 @@ chkTofchk&predEle.sh 的简化版，只有第(3-5)步骤
 ### 11.2 chkTofchk&predEle3.sh
 对chkTofchk&predEle2.sh进一步修改, 加入了MPI, HOMO, LUMO
 
+### 11.3 chkTofchk&predEle5.sh
+对chkTofchk&predEle4.sh进一步修改, 加入了energy
+
 ### 12. preddens.sh
 脚本文件：利用Multiwfn基于分子表面静电势描述符预测中性分子的晶体密度
 
