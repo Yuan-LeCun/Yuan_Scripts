@@ -9,10 +9,13 @@ jupyter notebook文件：SMI_PDB.ipynb的进阶版
 (1)进行了筛选：电荷不为零的分子 和 重原子数大于20的分子 不考虑
 (2)仅考虑含N Si P S Cl的分子
 
-### 3. PDB_SMI.ipynb
+### 3. cas_smiles.ipynb
+调用Pubchem API直接将cas转换成smiles
+
+### 4. PDB_SMI.ipynb
 jupyter notebook文件:读取所需PDB文件(Screening.txt目录),创建result.txt 逐行读取PDB文件内容，将其转换为SMILES描述符并写入result.txt中
 
-### 4. gjf_get.ipynb
+### 5. gjf_get.ipynb
 jupyter notebook文件：将PDB文件中的几何坐标提取出来并写入gjf文件
 (1)遍历当前文件夹中的PDB文件
 (2)逐一读取PDB文件中原子坐标
@@ -20,17 +23,27 @@ jupyter notebook文件：将PDB文件中的几何坐标提取出来并写入gjf�
 (4)按标准格式写入gjf文件 （几何优化 + 单点能计算）
 (5)针对每个gjf文件，按顺序写一个shell脚本文件，用于提交计算
 
-### 5. get_out.ipynb
+### 6. smi_gjf_get.ipynb
+### 7. smi_gjf_get_local.ipynb
+本质上是一样的, 只是一个是为本地写gjf文件, 一个是为服务器上写gjf文件, 读取smiles文件时形式偶尔需要修改!
+
+### 8. get_out.ipynb
 jupyter notebook文件：将out文件夹中最后一次优化后的几何坐标提取出来
 (1)遍历当前文件夹下所有的out文件
 (1)读取out文件，找到'Standard orientation' 并记录下标
 (1)针对每种元素对应的数值 如（C:6 O:8 H:1），进行类别转换并写入为PDB文件
 
-### 6. preElectro.sh
+### 9. get_wrongoutPDB_gjf.py
+get_out.py的进阶版
+(1)读取所有out文件, 报错的out文件则拿出其最后一次几何优化后的原子坐标信息并生成PDB
+(2)需要注意的是在写成PDB时,需要注意原子类型的添加
+(3)最后写成gjf, bash, gaussslurm.sh
+
+### 10. preElectro.sh
 脚本文件
 chkTofchk&predEle.sh 的简化版，只有第(3-5)步骤
 
-### 7. chkTofchk&predEle.sh
+### 11. chkTofchk&predEle.sh
 脚本文件
 (1)遍历本文件夹下所有Guassian计算的chk文件 Loop 
 (2)将chk转换为fchk文件
@@ -39,33 +52,36 @@ chkTofchk&predEle.sh 的简化版，只有第(3-5)步骤
 (5)maxi = grep "Maximal value" out.txt | awk -F: '{print $3}' | awk '{print $1}'
 (6)mini maxi 保存到 result.txt中
 
-### 8. chkTofchk&predEle2.sh
+### 11.1. chkTofchk&predEle2.sh
 脚本文件：对chkTofchk&predEle.sh存在的问题进行了改进
 (1)对chk文件进行了sort，避免了chk文件乱序输出
 (2)对所计算文件进行了标注
 (3)引入报错机制；在formchk转换失败时，输出错误信息
 (4)在Multiwfn_noGUI分析失败时，在result.txt中写入错误文件
 
-### 8.1 chkTofchk&predEle3.sh
+### 11.2 chkTofchk&predEle3.sh
 对chkTofchk&predEle2.sh进一步修改, 加入了MPI, HOMO, LUMO
 
-### 9. preddens.sh
+### 12. preddens.sh
 脚本文件：利用Multiwfn基于分子表面静电势描述符预测中性分子的晶体密度
 
-### 10. get_holumo.sh
+### 13. get_holumo.sh
 脚本文件:调用Multiwfn_noGUI 实现对本文件夹下的所有fchk文件分析, 并提取HOMO和LUMO值存入holumo.txt中
 
-### 11. 自动切割表面.ipynb
+### 14. 自动切割表面.ipynb
 jupyter notebook文件：接入Materials_Project数据库，并进行晶格表面自动切割
 (1)切表面之前要用SpacegroupAnalyzer(struct).get_conventional_standard_structure() 确定已经将晶胞转化成了惯用晶胞
 (2)SlabGenerator产生所有可能截断的表面，先读入一个structure类的结构，确定晶面指数：miller_index=[1, 1, 1]，确定slab层的最小厚度：min_slab_size=8.0 (unit: Angstrom)，确定真空层的厚度：min_vacuum_size=15.0 (unit: Angstrom)
 (3)在循环所有可能的截断的表面，如果是Au(111)的话只有一个可能的暴露表面，如果是化合物，可能有多种表面
 (4)用make_supercell进行扩胞
 
-### 12. file.ipynb
+### 15. file.ipynb
 数据提取,并写入atom.{step}.csv文件和file_list.txt
 
-### 13.v4-End.py 
+### 15.1.file_v2.ipynb
+file的进阶版, 写成函数方便后续操作
+
+### 16.v4-End.py 
 全CPU加速,实现溶剂化壳层分类与统计
 (1)在MD后实现了阴阳离子和溶剂分子的划分,如放入posk posDMM posFSI中
 (2)两个for嵌套,实现碱金属离子与溶剂分子 和 阴离子的配位统计(溶剂化壳层内,RDF距离限制)
@@ -74,15 +90,40 @@ jupyter notebook文件：接入Materials_Project数据库，并进行晶格表�
 (5)统计ratioAGGFSI:*FSI-K
 (6)统计ratioCN(such as DMM=3 FSI=0 CNDMM=7 CNFSI=0) 溶剂化壳层内溶剂分子数量及溶剂分子上配位数
 
-### 14.str_outputs_3.py
+
+### 16.1 v5.py
+v4-end.py进阶版
+对变量名统一进行了规范, 如cation, anion, solvent_e3, solvent_n7, solvent_h6
+
+### 17.str_outputs_3.py
 根据ratioCN:配位情况及配位数 将对应的溶剂化团簇提取出来生成gjf文件
 
-### 15. smiles&graph.ipynb
+### 18. smiles&graph.ipynb
 (1)利用NetworkX 和 RDKit包读取SMILES
 (2)结构绘制为图片并保存
 (3)SMILES与图片一同插入进excel中
 (4)第三列, 第四列分别是分子式和分子重量用于描述分子
 
-### 16. answer&que.ipynb
+### 19. answer&que.ipynb
 (1)与smiles&graph.ipynb联用, 读取dataset_with_image.xlsx文件
 (2)通过提示栏输入分子式和分子重量, 将对应的Smiles文件提取进extracted_smiles.xlsx文件中, 用于后续的Smiles_trans_PDB_trans_gjf
+
+### 20. Cleaner.py
+(1)对RDKIT版本有特殊要求, 可能会报错!
+(2)将ISOsmiles转换成CanonicalSmiles, 对Smiles进行清洗和标准化格式转换
+
+### 21.File_CarbonOxgen_addLi.ipynb
+(1) 自动识别PDB并提取PDB原子坐标信息和原子类别
+(2)在羰基氧附近添加一个Li原子, 且保持Li原子与羰基氧的距离为3埃, Li原子远离其他原子
+
+### 22.MultiwfnMLhelper.py
+Notice : 该py文件仅在Linux环境下使用, 且需要能直接调用Multiwfn or Multiwfn_noGUI , setting.ini中i_silence设置为1
+(1)调用Multiwfn对fchk文件进行解析, 并提取相应的分子性质描述符
+(2) 众多分子性质描述符可用于后续的机器学习
+
+
+
+
+
+
+
