@@ -93,10 +93,15 @@ file的进阶版, 写成函数方便后续操作
 (5)统计ratioAGGFSI:*FSI-K
 (6)统计ratioCN(such as DMM=3 FSI=0 CNDMM=7 CNFSI=0) 溶剂化壳层内溶剂分子数量及溶剂分子上配位数
 
-
 ### 16.1 v5.py
 v4-end.py进阶版
 对变量名统一进行了规范, 如cation, anion, solvent_e3, solvent_n7, solvent_h6
+
+### 16.2 v5_single_solvent.py
+变量名规范后, 主要针对单溶剂
+
+### 16.3 v5_three_solvent.py
+针对三溶剂
 
 ### 17.str_outputs_3.py
 根据ratioCN:配位情况及配位数 将对应的溶剂化团簇提取出来生成gjf文件
@@ -123,6 +128,12 @@ v4-end.py进阶版
 Notice : 该py文件仅在Linux环境下使用, 且需要能直接调用Multiwfn or Multiwfn_noGUI , setting.ini中i_silence设置为1
 (1)调用Multiwfn对fchk文件进行解析, 并提取相应的分子性质描述符
 (2) 众多分子性质描述符可用于后续的机器学习
+
+### 23.anion_v4.py
+Py文件, 计算以FSI为中心的溶剂化壳层周围的成份(FSI-K, FSI-FSI, FSI-Solvent)
+
+### 23.1 anion_v6.py
+anion_v4.py进阶版, 全CPU 加速!
 
 
 
