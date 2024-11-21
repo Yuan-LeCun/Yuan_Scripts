@@ -52,17 +52,17 @@ chkTofchk&predEle.sh 的简化版，只有第(3-5)步骤
 (5)maxi = grep "Maximal value" out.txt | awk -F: '{print $3}' | awk '{print $1}'
 (6)mini maxi 保存到 result.txt中
 
-### 11.1. chkTofchk&predEle2.sh
+#### 11.1. chkTofchk&predEle2.sh
 脚本文件：对chkTofchk&predEle.sh存在的问题进行了改进
 (1)对chk文件进行了sort，避免了chk文件乱序输出
 (2)对所计算文件进行了标注
 (3)引入报错机制；在formchk转换失败时，输出错误信息
 (4)在Multiwfn_noGUI分析失败时，在result.txt中写入错误文件
 
-### 11.2 chkTofchk&predEle3.sh
+#### 11.2 chkTofchk&predEle3.sh
 对chkTofchk&predEle2.sh进一步修改, 加入了MPI, HOMO, LUMO
 
-### 11.3 chkTofchk&predEle5.sh
+#### 11.3 chkTofchk&predEle5.sh
 对chkTofchk&predEle4.sh进一步修改, 加入了energy
 
 ### 12. preddens.sh
@@ -93,14 +93,14 @@ file的进阶版, 写成函数方便后续操作
 (5)统计ratioAGGFSI:*FSI-K
 (6)统计ratioCN(such as DMM=3 FSI=0 CNDMM=7 CNFSI=0) 溶剂化壳层内溶剂分子数量及溶剂分子上配位数
 
-### 16.1 v5.py
+#### 16.1 v5.py
 v4-end.py进阶版
 对变量名统一进行了规范, 如cation, anion, solvent_e3, solvent_n7, solvent_h6
 
-### 16.2 v5_single_solvent.py
+#### 16.2 v5_single_solvent.py
 变量名规范后, 主要针对单溶剂
 
-### 16.3 v5_three_solvent.py
+#### 16.3 v5_three_solvent.py
 针对三溶剂
 
 ### 17.str_outputs_3.py
@@ -132,11 +132,16 @@ Notice : 该py文件仅在Linux环境下使用, 且需要能直接调用Multiwfn
 ### 23.anion_v4.py
 Py文件, 计算以FSI为中心的溶剂化壳层周围的成份(FSI-K, FSI-FSI, FSI-Solvent)
 
-### 23.1 anion_v6.py
+#### 23.1 anion_v6.py
 anion_v4.py进阶版, 全CPU 加速!
 
+### 24. temp_v2.py
+py文件, 计算溶剂化壳层中离子键平均寿命!
+该代码用于跟踪钾离子与周围分子(H2O、DMSO、FSI)之间的连接关系
+通过比较当前和之前的连接分子集合，检测连接的变化，并计算连接的持续时间，最终求得平均连接寿命
 
-
+#### 24.1 temp_v3.py
+temp_v2.py进阶版, 全CPU加速
 
 
 
